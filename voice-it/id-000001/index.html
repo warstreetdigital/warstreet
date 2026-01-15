@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Voice.it</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    text-align: center;
+  }
+
+  .wrap {
+    width: 90%;
+    max-width: 360px;
+  }
+
+  p {
+    margin: 0 0 6px;
+    font-size: 16px;
+    opacity: 0.9;
+  }
+
+  strong {
+    font-size: 18px;
+  }
+
+  .player {
+    margin-top: 24px;
+    background: #111;
+    border-radius: 999px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .play {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .bar {
+    flex: 1;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress {
+    width: 0%;
+    height: 100%;
+    background: #fff;
+  }
+
+  .time {
+    font-size: 12px;
+    opacity: 0.6;
+    width: 36px;
+    text-align: right;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <p>You’ve been sent a voice note.</p>
+  <strong>Listen.</strong>
+
+  <div class="player">
+    <button class="play" id="playBtn">▶</button>
+    <div class="bar"><div class="progress" id="progress"></div></div>
+    <div class="time" id="time">0:00</div>
+  </div>
+
+  <audio id="audio" src="voiceit.mp3"></audio>
+</div>
+
+<script>
+  const audio = document.getElementById('audio');
+  const playBtn = document.getElementById('playBtn');
+  const progress = document.getElementById('progress');
+  const time = document.getElementById('time');
+
+  playBtn.onclick = () => {
+    audio.paused ? audio.play() : audio.pause();
+  };
+
+  audio.onplay = () => playBtn.textContent = "❚❚";
+  audio.onpause = () => playBtn.textContent = "▶";
+
+  audio.ontimeupdate = () => {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = pct + "%";
+    const m = Math.floor(audio.currentTime / 60);
+    const s = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+    time.textContent = `${m}:${s}`;
+  };
+</script>
+</body>
+</html>
+
