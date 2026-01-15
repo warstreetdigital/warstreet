@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Peter C Kazungu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Georgia", serif;
+}
+
+body {
+  background: #f5f3ef;
+  color: #2b2b2b;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container {
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+/* TITLES */
+.small-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  opacity: 0.6;
+  margin-bottom: 6px;
+}
+
+.main-title {
+  font-size: 1.7rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+
+.sub-title {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.totem {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  opacity: 0.6;
+  margin-bottom: 18px;
+}
+
+/* SLIDESHOW */
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.6s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* BLURRED BACKGROUND */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(18px);
+  transform: scale(1.1);
+}
+
+/* FOREGROUND IMAGE */
+.slide img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+/* AUDIO */
+.audio-box {
+  margin: 16px 0 24px;
+}
+
+.audio-btn {
+  background: #e6dfd2;
+  border: 1px solid #cfc7b8;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* MESSAGE */
+.message-box {
+  background: #ffffff;
+  padding: 20px 18px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* FOOTER */
+.footer {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="small-title">IN MEMORY OF</div>
+  <div class="main-title">PETER C KAZUNGU</div>
+  <div class="sub-title">1938 — 2026</div>
+  <div class="totem">SAMANYANGA</div>
+
+  <!-- SLIDESHOW -->
+  <div class="slideshow">
+    <div class="slide active" style="--bg:url('https://i.ibb.co/MkDRx8FQ/Screenshot-20260109-104805-Whats-App-Business.jpg')">
+      <img src="https://i.ibb.co/MkDRx8FQ/Screenshot-20260109-104805-Whats-App-Business.jpg">
+    </div>
+    <div class="slide" style="--bg:url('https://i.ibb.co/rK9nj7Bd/IMG-7776.jpg')">
+      <img src="https://i.ibb.co/rK9nj7Bd/IMG-7776.jpg">
+    </div>
+    <div class="slide" style="--bg:url('https://i.ibb.co/23JfnMpk/IMG-20260114-WA0051-1.jpg')">
+      <img src="https://i.ibb.co/23JfnMpk/IMG-20260114-WA0051-1.jpg">
+    </div>
+    <div class="slide" style="--bg:url('https://i.ibb.co/prQG8qVk/IMG-20260114-WA0042.jpg')">
+      <img src="https://i.ibb.co/prQG8qVk/IMG-20260114-WA0042.jpg">
+    </div>
+    <div class="slide" style="--bg:url('https://i.ibb.co/kV7C00xj/IMG-7779.jpg')">
+      <img src="https://i.ibb.co/kV7C00xj/IMG-7779.jpg">
+    </div>
+  </div>
+
+  <!-- AUDIO -->
+  <div class="audio-box">
+    <audio id="memAudio" src="audio.mp3"></audio>
+    <button class="audio-btn" onclick="toggleAudio()">Play Tribute</button>
+  </div>
+
+  <!-- MESSAGE -->
+  <div class="message-box">
+    He walked his years with purpose.<br><br>
+
+    From February 16, 1938<br>
+    to January 07, 2026,<br>
+    his life touched many paths.<br><br>
+
+    He was a father, a guide,<br>
+    and a name that will continue<br>
+    through those who remember him.<br><br>
+
+    We do not mark his absence —<br>
+    we honor the life he completed.
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    A memory preserved by Warstreet Experience Model
+  </div>
+
+</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+let index = 0;
+
+setInterval(() => {
+  slides[index].classList.remove("active");
+  index = (index + 1) % slides.length;
+  slides[index].classList.add("active");
+}, 5200);
+
+const audio = document.getElementById("memAudio");
+const btn = document.querySelector(".audio-btn");
+
+function toggleAudio() {
+  if (audio.paused) {
+    audio.play();
+    btn.textContent = "Pause Tribute";
+  } else {
+    audio.pause();
+    btn.textContent = "Play Tribute";
+  }
+}
+</script>
+
+</body>
+</html>
