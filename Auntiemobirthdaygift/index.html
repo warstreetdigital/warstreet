@@ -1,1 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monica Kazungu • Birthday Memory</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f6f5f3;
+  --card:#ffffff;
+  --fg:#1f1b18;
+  --muted:#6f6760;
+  --border:#e6e0da;
+}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:"Inter Tight",system-ui;
+  background:var(--bg);
+  color:var(--fg);
+}
+
+.container{
+  max-width:520px;
+  margin:auto;
+  padding:34px 16px 90px;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  margin-bottom:42px;
+}
+.hero h1{
+  font-size:22px;
+  letter-spacing:1.8px;
+  margin:0;
+}
+.context,
+.date{
+  font-size:13px;
+  letter-spacing:1.4px;
+  color:var(--muted);
+  margin-top:10px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px 18px 26px;
+  margin-bottom:34px;
+}
+.card h3{
+  font-size:14px;
+  letter-spacing:1.6px;
+  margin-bottom:16px;
+}
+
+/* SLIDESHOW */
+.slideshow{
+  position:relative;
+}
+.slideshow img{
+  width:100%;
+  border-radius:14px;
+  display:none;
+}
+.slideshow img.active{
+  display:block;
+}
+
+/* MESSAGE */
+.message{
+  font-size:15px;
+  line-height:1.9;
+  color:#2a2622;
+}
+
+/* AUDIO */
+audio{
+  width:100%;
+  margin-bottom:18px;
+}
+
+/* VIDEO */
+video{
+  width:100%;
+  border-radius:14px;
+}
+
+/* FOOTER */
+.footer{
+  text-align:center;
+  font-size:11px;
+  letter-spacing:1.2px;
+  color:var(--muted);
+  margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <h1>MONICA KAZUNGU</h1>
+  <div class="context">Birthday Memory</div>
+  <div class="date">19 JANUARY</div>
+</div>
+
+<!-- CARD 1: AUDIO + SLIDESHOW -->
+<div class="card">
+  <h3>OUR MOMENTS</h3>
+
+  <!-- AUDIO ON TOP -->
+  <audio src="auntiMo.mp3" controls></audio>
+
+  <!-- AUTO SLIDESHOW -->
+  <div class="slideshow" id="slideshow">
+    <img src="slide1.jpg" class="active">
+    <img src="slide2.jpg">
+    <img src="slide3.jpg">
+    <img src="slide4.jpg">
+    <img src="slide5.jpg">
+    <img src="slide6.jpg">
+  </div>
+</div>
+
+<!-- CARD 2: MESSAGE -->
+<div class="card">
+  <h3>A MESSAGE FOR YOU</h3>
+  <div class="message">
+    Today we celebrate you — not just the years you’ve lived,  
+    but the warmth you bring into every space you enter.
+    <br><br>
+    Your kindness is quiet but powerful,  
+    your strength gentle but unshakable.  
+    You have a way of making people feel seen,  
+    and that is a gift few ever carry.
+    <br><br>
+    May this new year return to you  
+    the love you give so freely,  
+    the joy you create so naturally,  
+    and the peace you deserve deeply.
+    <br><br>
+    Happy Birthday, Monica.  
+    You are cherished — today and always.
+  </div>
+</div>
+
+<!-- CARD 3: VIDEO -->
+<div class="card">
+  <h3>TODAY’S MEMORY</h3>
+  <video src="video.mp4" controls></video>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Powered by Warstreet Experience Model
+</div>
+
+</div>
+
+<script>
+let slides = document.querySelectorAll("#slideshow img");
+let index = 0;
+
+setInterval(() => {
+  slides[index].classList.remove("active");
+  index = (index + 1) % slides.length;
+  slides[index].classList.add("active");
+}, 3500);
+</script>
+
+</body>
+</html>
