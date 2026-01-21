@@ -15,8 +15,8 @@ body{
   color:#fdf4f6;
 }
 .container{
-  padding:32px 20px 80px;
-  max-width:560px;
+  padding:32px 16px 80px;
+  max-width:600px;
   margin:auto;
 }
 .card{
@@ -34,27 +34,27 @@ body{
   font-weight:600;
   color:#ffe7e9;
 }
+.rail-container{
+  overflow:hidden;
+  position:relative;
+  height:360px; /* enlarged height for immersive images */
+}
 .rail{
   display:flex;
   gap:16px;
-  overflow:hidden;
-  position:relative;
-}
-.rail img{
-  width:230px;
-  border-radius:18px;
-  flex-shrink:0;
-  object-fit:cover;
-  filter:brightness(0.9) contrast(1.1);
   position:absolute;
   top:0;
   left:0;
-  opacity:0;
-  transition:opacity 0.8s ease, transform 0.8s ease;
 }
-.rail img.active{
-  opacity:1;
-  transform:scale(1.05);
+.rail img{
+  width:100%;
+  max-width:540px; /* nearly full width of container */
+  border-radius:18px;
+  object-fit:cover;
+  filter:brightness(0.9) contrast(1.1);
+  flex-shrink:0;
+  transition:transform 0.3s ease;
+  cursor:pointer;
 }
 .message{
   font-size:16px;
@@ -71,19 +71,19 @@ body{
   box-shadow:0 6px 14px rgba(0,0,0,0.5);
 }
 .play-btn{
-  width:42px;
-  height:42px;
+  width:36px;
+  height:36px;
   border-radius:50%;
-  background:#ff2a2a;
+  background:#fff;
   border:none;
   margin-right:14px;
   cursor:pointer;
-  box-shadow:0 4px 10px rgba(0,0,0,0.4);
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#fff;
-  font-size:18px;
+  color:#1c1a19;
+  font-size:16px;
+  font-weight:600;
 }
 .progress{
   flex:1;
@@ -107,15 +107,22 @@ body{
 
 <div class="container">
 
-<!-- CARD 1: PHOTO SLIDES -->
+<!-- CARD 1: PHOTO RAIL -->
 <div class="card">
   <h3>OUR MOMENT</h3>
-  <div class="rail">
-    <img src="slide1.jpg" class="active">
-    <img src="slide2.jpg">
-    <img src="slide3.jpg">
-    <img src="slide4.jpg">
-    <img src="slide5.jpg">
+  <div class="rail-container">
+    <div class="rail" id="rail">
+      <img src="slide1.jpg">
+      <img src="slide2.jpg">
+      <img src="slide3.jpg">
+      <img src="slide4.jpg">
+      <img src="slide5.jpg">
+      <img src="slide1.jpg">
+      <img src="slide2.jpg">
+      <img src="slide3.jpg">
+      <img src="slide4.jpg">
+      <img src="slide5.jpg">
+    </div>
   </div>
 </div>
 
@@ -143,34 +150,51 @@ body{
 </div>
 
 <script>
-// Non-linear auto-play rail
-const railImages = document.querySelectorAll('.rail img');
-let activeIndex = 0;
-const sequence = [0,2,4,1,3]; // shuffled order for wheel effect
-function showNextImage(){
-  railImages.forEach((img,i)=> img.classList.remove('active'));
-  railImages[sequence[activeIndex]].classList.add('active');
-  activeIndex = (activeIndex+1)%sequence.length;
-}
-setInterval(showNextImage, 2500); // change every 2.5s
+// ----------------------
+// WHEEL-LIKE AUTO-SCROLL RAIL
+// ----------------------
+const rail = document.getElementById('rail');
+let scrollPos = 0;
+const speed = 0.7; // px per frame
 
-// Premium audio
+let isPaused = false;
+
+rail.addEventListener('mousedown', () => { isPaused = true; });
+rail.addEventListener('touchstart', () => { isPaused = true; });
+rail.addEventListener('mouseup', () => { isPaused = false; });
+rail.addEventListener('touchend', () => { isPaused = false; });
+
+function scrollRail(){
+  if(!isPaused){
+    scrollPos += speed;
+    if(scrollPos >= rail.scrollWidth/2){
+      scrollPos = 0;
+    }
+    rail.style.transform = `translateX(-${scrollPos}px)`;
+  }
+  requestAnimationFrame(scrollRail);
+}
+scrollRail();
+
+// ----------------------
+// PREMIUM AUDIO PLAYER
+// ----------------------
 const audio = document.getElementById('audio');
 const playBtn = document.querySelector('.play-btn');
 const progressBar = document.querySelector('.progress-bar');
 
-playBtn.addEventListener('click', ()=>{
+playBtn.addEventListener('click', () => {
   if(audio.paused){
     audio.play();
-    playBtn.innerHTML='&#10074;&#10074;';
+    playBtn.innerHTML = '&#10074;&#10074;'; // pause symbol
   } else {
     audio.pause();
-    playBtn.innerHTML='&#9658;';
+    playBtn.innerHTML = '&#9658;'; // play symbol
   }
 });
 
-audio.addEventListener('timeupdate', ()=>{
-  const pct = (audio.currentTime/audio.duration)*100;
+audio.addEventListener('timeupdate', () => {
+  const pct = (audio.currentTime / audio.duration) * 100;
   progressBar.style.width = pct + '%';
 });
 </script>
