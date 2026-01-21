@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chipochashe Valentine Proposal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:"Inter Tight",system-ui;
+  background:#1c1a19; /* dark cinematic base */
+  color:#fdf4f6; /* soft text contrast */
+}
+.container{
+  padding:32px 20px 80px;
+  max-width:560px;
+  margin:auto;
+}
+.card{
+  background:rgba(255,255,255,0.06); /* semi-transparent editorial card */
+  border-radius:20px;
+  padding:26px 22px;
+  margin-bottom:36px;
+  box-shadow:0 12px 28px rgba(0,0,0,0.35);
+  backdrop-filter:blur(12px);
+}
+.card h3{
+  font-size:16px;
+  letter-spacing:1.6px;
+  margin-bottom:18px;
+  font-weight:600;
+  color:#ffe7e9; /* light warm text for Valentine feel */
+}
+.rail{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.rail::-webkit-scrollbar{display:none;}
+.rail img{
+  width:230px;
+  border-radius:18px;
+  flex-shrink:0;
+  object-fit:cover;
+  filter:brightness(0.9) contrast(1.1); /* editorial photo vibe */
+  transition:transform 0.3s ease;
+}
+.rail img:hover{
+  transform:scale(1.05);
+}
+.message{
+  font-size:16px;
+  line-height:1.9;
+  color:#ffe7e9;
+  font-weight:400;
+}
+audio{
+  width:100%;
+  border-radius:14px;
+  outline:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- CARD 1: PHOTO SLIDES -->
+<div class="card">
+  <h3>OUR MOMENT</h3>
+  <div class="rail">
+    <img src="slide1.jpg" alt="Chipochashe Valentine 1">
+    <img src="slide2.jpg" alt="Chipochashe Valentine 2">
+    <img src="slide3.jpg" alt="Chipochashe Valentine 3">
+    <img src="slide4.jpg" alt="Chipochashe Valentine 4">
+    <img src="slide5.jpg" alt="Chipochashe Valentine 5">
+  </div>
+</div>
+
+<!-- CARD 2: MESSAGE -->
+<div class="card">
+  <h3>A NOTE FOR YOU</h3>
+  <div class="message">
+    I wanted to give you something real.  
+    Something that feels like this moment: quiet, intentional, ours.  
+    Chipochashe, will you be my Valentine?  
+    I’m still choosing you, and I hope this is the start of what we keep building together.
+  </div>
+</div>
+
+<!-- CARD 3: AUDIO -->
+<div class="card">
+  <h3>HEAR MY HEART</h3>
+  <audio src="val.mp3" controls></audio>
+</div>
+
+</div>
+
+</body>
+</html>
