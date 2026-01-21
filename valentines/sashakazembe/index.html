@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can You Be My Valentine — Sasha</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#1a1416;          /* low-brightness, romantic */
+  --card:#221a1d;        /* editorial dark */
+  --text:#f2e9ec;
+  --muted:#c9b6bc;
+  --accent:#c21f3a;      /* rose */
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Inter Tight",system-ui;
+  background:radial-gradient(1200px 600px at 50% -10%, #2a1f23, var(--bg));
+  color:var(--text);
+}
+.container{
+  padding:28px 16px 96px;
+  max-width:620px;
+  margin:auto;
+}
+
+/* CARDS */
+.card{
+  background:linear-gradient(180deg, #241b1f, var(--card));
+  border-radius:22px;
+  padding:26px 22px;
+  margin-bottom:36px;
+  box-shadow:0 18px 40px rgba(0,0,0,.45);
+}
+.card h3{
+  font-size:14px;
+  letter-spacing:2.2px;
+  margin:0 0 18px;
+  font-weight:600;
+  color:var(--muted);
+}
+
+/* PHOTO RAIL — center-stop autoplay */
+.rail-container{
+  overflow:hidden;
+  position:relative;
+  height:420px; /* near full feel */
+}
+.rail{
+  display:flex;
+  gap:18px;
+  position:absolute;
+  top:0; left:0;
+}
+.rail img{
+  width:100%;
+  max-width:560px;
+  height:100%;
+  border-radius:18px;
+  object-fit:cover;
+  filter:brightness(.82) contrast(1.08);
+  flex-shrink:0;
+  user-select:none;
+}
+
+/* MESSAGE */
+.message{
+  font-size:16px;
+  line-height:1.9;
+  color:#efe4e8;
+}
+
+/* AUDIO — premium, non-default */
+.audio-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:8px;
+}
+.audio-btn{
+  padding:14px 42px;
+  border-radius:44px;
+  border:1px solid rgba(255,255,255,.18);
+  background:linear-gradient(135deg,#3a0e1a,#7a1a2e);
+  color:#ffe8ee;
+  font-weight:600;
+  letter-spacing:3px;
+  cursor:pointer;
+  box-shadow:0 14px 36px rgba(194,31,58,.35);
+}
+.audio-btn.playing{
+  background:linear-gradient(135deg,#7a1a2e,#c21f3a);
+}
+
+/* RSVP */
+.rsvp{
+  display:flex;
+  justify-content:center;
+  margin-top:18px;
+}
+.rsvp a{
+  text-decoration:none;
+  padding:16px 48px;
+  border-radius:48px;
+  background:linear-gradient(135deg,#c21f3a,#ff4b6a);
+  color:#fff;
+  font-weight:700;
+  letter-spacing:2px;
+  box-shadow:0 18px 42px rgba(255,75,106,.45);
+}
+
+/* FOOT */
+.footer{
+  text-align:center;
+  color:#b9a6ad;
+  font-size:11px;
+  letter-spacing:1.6px;
+  margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- CARD 1: PHOTOS -->
+<div class="card">
+  <h3>FOR SASHA KAZEMBE</h3>
+  <div class="rail-container">
+    <div class="rail" id="rail">
+      <img src="photo1.jpg" alt="">
+      <img src="photo2.jpg" alt="">
+      <img src="photo3.jpg" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- CARD 2: PROPOSAL MESSAGE -->
+<div class="card">
+  <h3>VALENTINE</h3>
+  <div class="message">
+    Sasha,  
+    This isn’t loud. It’s intentional.  
+    I’ve thought about how you move through life, how you make moments feel steady.  
+    I don’t want today to rush past us.  
+    I want it to be ours.  
+    <br><br>
+    Will you be my Valentine?
+  </div>
+</div>
+
+<!-- CARD 3: AUDIO -->
+<div class="card">
+  <h3>VOICE NOTE</h3>
+  <div class="audio-wrap">
+    <button class="audio-btn" id="audioBtn">LISTEN</button>
+  </div>
+  <audio id="audio" src="sasha.mp3"></audio>
+</div>
+
+<!-- RSVP -->
+<div class="card">
+  <h3>R.S.V.P</h3>
+  <div class="rsvp">
+    <a href="https://wa.me/263773428205?text=Yes%2C%20I%20want%20to%20be%20your%20Valentine.%20%E2%9D%A4%EF%B8%8F" target="_blank">
+      YES
+    </a>
+  </div>
+</div>
+
+<div class="footer">A private proposal by bands.zw</div>
+
+</div>
+
+<script>
+/* CENTER-STOP AUTO RAIL */
+const rail = document.getElementById('rail');
+const imgs = rail.querySelectorAll('img');
+let i = 0;
+const pause = 2600;
+const containerW = document.querySelector('.rail-container').offsetWidth;
+
+function step(){
+  const w = imgs[0].offsetWidth + 18;
+  const x = i * w - (containerW/2 - w/2);
+  rail.style.transition = 'transform .65s ease';
+  rail.style.transform = `translateX(-${x}px)`;
+  i = (i + 1) % imgs.length;
+  setTimeout(step, pause);
+}
+step();
+
+/* AUDIO */
+const btn = document.getElementById('audioBtn');
+const audio = document.getElementById('audio');
+let playing = false;
+btn.onclick = () => {
+  if(playing){
+    audio.pause(); btn.classList.remove('playing'); btn.textContent='LISTEN';
+  } else {
+    audio.play(); btn.classList.add('playing'); btn.textContent='PAUSE';
+  }
+  playing = !playing;
+};
+</script>
+
+</body>
+</html>
