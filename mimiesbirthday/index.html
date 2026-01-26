@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Mimmie</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  /* Feminine, soft, low brightness */
+  --bg-start:#f4f7fb;   /* sky blue */
+  --bg-end:#f8ecef;     /* soft blush pink */
+  --card:#ffffff;
+  --text:#1f1c1a;
+  --muted:#8b7f82;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Inter Tight",system-ui;
+  background:linear-gradient(180deg,var(--bg-start),var(--bg-end));
+  color:var(--text);
+}
+.container{
+  max-width:540px;
+  margin:auto;
+  padding:32px 16px 96px;
+}
+
+/* CARD */
+.card{
+  background:rgba(255,255,255,0.92);
+  border-radius:20px;
+  padding:24px 20px;
+  margin-bottom:36px;
+  box-shadow:0 14px 34px rgba(0,0,0,.08);
+}
+.card h3{
+  font-size:14px;
+  letter-spacing:2px;
+  margin:0 0 18px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+/* HEADER */
+.header{
+  text-align:center;
+}
+.header h1{
+  margin:0;
+  font-size:28px;
+  letter-spacing:2px;
+  font-weight:600;
+}
+.header p{
+  margin-top:8px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* SLIDESHOW */
+.rail{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+}
+.rail img{
+  width:240px;
+  height:320px;
+  border-radius:16px;
+  object-fit:cover;
+  scroll-snap-align:center;
+  flex-shrink:0;
+}
+
+/* MESSAGE */
+.message{
+  font-size:15px;
+  line-height:1.8;
+}
+
+/* AUDIO */
+.audio-wrap{
+  display:flex;
+  justify-content:center;
+}
+.audio-btn{
+  padding:14px 44px;
+  border-radius:44px;
+  border:1px solid rgba(0,0,0,.12);
+  background:linear-gradient(135deg,#eef3fa,#f6e9ee);
+  font-weight:600;
+  letter-spacing:3px;
+  cursor:pointer;
+}
+.audio-btn.playing{
+  background:linear-gradient(135deg,#dbe7f5,#f2dfe6);
+}
+
+.footer{
+  text-align:center;
+  margin-top:40px;
+  font-size:11px;
+  letter-spacing:1.4px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="card header">
+  <h1>HAPPY BIRTHDAY MIMMIE</h1>
+  <p>From MC</p>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="card">
+  <h3>OUR MOMENTS</h3>
+  <div class="rail">
+    <img src="mimi.jpg1">
+    <img src="mimi.jpg2">
+    <img src="mimi.jpg3">
+    <img src="mimi.jpg4">
+    <img src="mimi.jpg5">
+  </div>
+</div>
+
+<!-- MESSAGE -->
+<div class="card">
+  <h3>A BIRTHDAY NOTE</h3>
+  <div class="message">
+    Today is a reminder of how special your presence is.  
+    May this year bring you calm wins, real joy, and moments worth keeping.  
+    You are appreciated more than you know.  
+    Happy Birthday, Mimmie.
+  </div>
+</div>
+
+<!-- AUDIO -->
+<div class="card">
+  <h3>VOICE MEMORY</h3>
+  <div class="audio-wrap">
+    <button class="audio-btn" id="audioBtn">LISTEN</button>
+  </div>
+  <audio id="audio" src="mimi.mp3"></audio>
+</div>
+
+<div class="footer">
+  A memory preserved by WarStreet Experience Model
+</div>
+
+</div>
+
+<script>
+const btn = document.getElementById('audioBtn');
+const audio = document.getElementById('audio');
+let playing = false;
+
+btn.onclick = () => {
+  if(playing){
+    audio.pause();
+    btn.textContent = "LISTEN";
+    btn.classList.remove("playing");
+  } else {
+    audio.play();
+    btn.textContent = "PAUSE";
+    btn.classList.add("playing");
+  }
+  playing = !playing;
+};
+</script>
+
+</body>
+</html>
