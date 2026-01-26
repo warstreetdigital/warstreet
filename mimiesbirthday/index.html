@@ -9,30 +9,52 @@
 
 <style>
 :root{
-  /* Feminine, soft, low brightness */
-  --bg-start:#f4f7fb;   /* sky blue */
-  --bg-end:#f8ecef;     /* soft blush pink */
+  --sky:#eef3fb;
+  --blush:#f6e7ee;
   --card:#ffffff;
   --text:#1f1c1a;
   --muted:#8b7f82;
 }
 
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:"Inter Tight",system-ui;
-  background:linear-gradient(180deg,var(--bg-start),var(--bg-end));
+  background:linear-gradient(180deg,var(--sky),var(--blush));
   color:var(--text);
 }
+
 .container{
   max-width:540px;
   margin:auto;
   padding:32px 16px 96px;
 }
 
+/* HEADER */
+.header{
+  text-align:center;
+  background:linear-gradient(135deg,#e9f0fb,#f3dde6);
+  border-radius:22px;
+  padding:36px 20px;
+  margin-bottom:40px;
+  box-shadow:0 18px 40px rgba(0,0,0,.08);
+}
+.header h1{
+  margin:0;
+  font-size:30px;
+  letter-spacing:2px;
+  font-weight:600;
+}
+.header p{
+  margin-top:10px;
+  font-size:14px;
+  color:var(--muted);
+}
+
 /* CARD */
 .card{
-  background:rgba(255,255,255,0.92);
+  background:rgba(255,255,255,0.94);
   border-radius:20px;
   padding:24px 20px;
   margin-bottom:36px;
@@ -44,22 +66,6 @@ body{
   margin:0 0 18px;
   color:var(--muted);
   font-weight:600;
-}
-
-/* HEADER */
-.header{
-  text-align:center;
-}
-.header h1{
-  margin:0;
-  font-size:28px;
-  letter-spacing:2px;
-  font-weight:600;
-}
-.header p{
-  margin-top:8px;
-  font-size:14px;
-  color:var(--muted);
 }
 
 /* SLIDESHOW */
@@ -90,7 +96,7 @@ body{
   justify-content:center;
 }
 .audio-btn{
-  padding:14px 44px;
+  padding:14px 46px;
   border-radius:44px;
   border:1px solid rgba(0,0,0,.12);
   background:linear-gradient(135deg,#eef3fa,#f6e9ee);
@@ -99,7 +105,7 @@ body{
   cursor:pointer;
 }
 .audio-btn.playing{
-  background:linear-gradient(135deg,#dbe7f5,#f2dfe6);
+  background:linear-gradient(135deg,#dbe7f5,#f0d9e2);
 }
 
 .footer{
@@ -117,7 +123,7 @@ body{
 <div class="container">
 
 <!-- HEADER -->
-<div class="card header">
+<div class="header">
   <h1>HAPPY BIRTHDAY MIMMIE</h1>
   <p>From MC</p>
 </div>
@@ -126,11 +132,11 @@ body{
 <div class="card">
   <h3>OUR MOMENTS</h3>
   <div class="rail">
-    <img src="mimi.jpg1">
-    <img src="mimi.jpg2">
-    <img src="mimi.jpg3">
-    <img src="mimi.jpg4">
-    <img src="mimi.jpg5">
+    <img src="mimi1.jpg">
+    <img src="mimi2.jpg">
+    <img src="mimi3.jpg">
+    <img src="mimi4.jpg">
+    <img src="mimi5.jpg">
   </div>
 </div>
 
@@ -138,9 +144,9 @@ body{
 <div class="card">
   <h3>A BIRTHDAY NOTE</h3>
   <div class="message">
-    Today is a reminder of how special your presence is.  
-    May this year bring you calm wins, real joy, and moments worth keeping.  
-    You are appreciated more than you know.  
+    Today is a quiet celebration of you.  
+    Your kindness, your strength, and the way you show up for others matter deeply.  
+    May this year return that same care to you in beautiful ways.  
     Happy Birthday, Mimmie.
   </div>
 </div>
