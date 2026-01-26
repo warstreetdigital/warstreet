@@ -71,14 +71,16 @@ body{
 /* SLIDESHOW */
 .rail{
   display:flex;
-  gap:16px;
+  gap:18px;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
 }
+.rail::-webkit-scrollbar{display:none}
 .rail img{
-  width:240px;
-  height:320px;
-  border-radius:16px;
+  width:280px;
+  height:360px;
+  border-radius:18px;
   object-fit:cover;
   scroll-snap-align:center;
   flex-shrink:0;
@@ -131,7 +133,7 @@ body{
 <!-- SLIDESHOW -->
 <div class="card">
   <h3>OUR MOMENTS</h3>
-  <div class="rail">
+  <div class="rail" id="rail">
     <img src="mimi1.jpg">
     <img src="mimi2.jpg">
     <img src="mimi3.jpg">
@@ -167,6 +169,40 @@ body{
 </div>
 
 <script>
+const rail = document.getElementById('rail');
+const images = rail.querySelectorAll('img');
+let index = 0;
+let autoplay;
+
+function scrollToImage(i){
+  const img = images[i];
+  const offset =
+    img.offsetLeft -
+    rail.offsetWidth / 2 +
+    img.offsetWidth / 2;
+
+  rail.scrollTo({ left: offset, behavior: "smooth" });
+}
+
+function startAutoplay(){
+  autoplay = setInterval(() => {
+    scrollToImage(index);
+    index = (index + 1) % images.length;
+  }, 2600);
+}
+
+function stopAutoplay(){
+  clearInterval(autoplay);
+}
+
+rail.addEventListener("touchstart", stopAutoplay);
+rail.addEventListener("mousedown", stopAutoplay);
+rail.addEventListener("touchend", startAutoplay);
+rail.addEventListener("mouseup", startAutoplay);
+
+startAutoplay();
+
+// AUDIO
 const btn = document.getElementById('audioBtn');
 const audio = document.getElementById('audio');
 let playing = false;
